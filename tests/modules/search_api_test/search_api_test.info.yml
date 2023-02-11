@@ -1,0 +1,7 @@
+name: 'Search API Test'
+type: module
+description: 'Support module for Search API tests'
+package: Testing
+dependencies:
+  - search_api:search_api
+hidden: true

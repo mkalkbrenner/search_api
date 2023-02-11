@@ -1,0 +1,7 @@
+type: module
+name: 'Search API node indexing test'
+description: 'Test module for testing indexing of nodes in Search API.'
+package: Testing
+dependencies:
+  - search_api:search_api_db
+hidden: true

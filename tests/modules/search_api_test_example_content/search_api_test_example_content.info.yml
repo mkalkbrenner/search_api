@@ -1,0 +1,7 @@
+type: module
+name: 'Example Content'
+description: 'Provides field definitions for example content.'
+package: Testing
+dependencies:
+  - drupal:entity_test
+hidden: true

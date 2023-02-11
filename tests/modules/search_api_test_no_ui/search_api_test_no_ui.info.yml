@@ -1,0 +1,7 @@
+name: 'Search API Test No UI'
+type: module
+description: 'Support module for Search API tests ("No UI" plugins)'
+package: Testing
+dependencies:
+  - search_api:search_api
+hidden: true
