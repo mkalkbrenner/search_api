@@ -47,6 +47,8 @@ jobs:
             - name: Merge search_api from drupal.org
               run: |
                 cd search_api
+                git config --local user.email "action@github.com"
+                git config --local user.name "GitHub Action"
                 git remote add drupal.org https://git.drupalcode.org/project/search_api.git
                 git fetch drupal.org
                 git merge --allow-unrelated-histories drupal.org/8.x-1.x
