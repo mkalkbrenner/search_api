@@ -1037,7 +1037,12 @@ class IntegrationTest extends SearchApiBrowserTestBase {
     // index.
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.field_link/delete');
     $this->assertSession()->pageTextNotContains('The listed configuration will be deleted.');
-    $this->assertSession()->pageTextContains('Search index');
+    $response = $this->getSession()->getPage()->getContent();
+    $response = substr($response, strpos($response, '<body'));
+    if (str_contains($response, '<script')) {
+      $response = substr($response, 0, strpos($response, '<script'));
+    }
+    $this->assertStringContainsString('Search index', $response);
 
     $this->submitForm([], 'Delete');
     $this->drupalGet('admin/structure/types/manage/article/fields/node.article.field_image/delete');

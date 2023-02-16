@@ -340,23 +340,7 @@ class Highlight extends ProcessorPluginBase implements PluginFormInterface {
         if (empty($highlighted_fields[$item_id][$field_id])) {
           $change = FALSE;
           foreach ($values as $i => $value) {
-            if (is_string($value)) {
-              $values[$i] = $this->highlightField($value, $keys);
-            }
-            else {
-              // In case of "foreign" indexes like Search API Solr Document
-              // datasources or Drupal multisite searches, the value could be
-              // NULL. In this case the backend is responsible to modify the
-              // highlighted_fields extra data later if it allows to use the
-              // highlight processor. Therefore, we must not remove the
-              // information about the field that "should" be highlighted at
-              // this point. Converting the value into an empty string is the
-              // backward compatible behaviour of this processor. The check if
-              // $value is a string above has just been added to avoid a
-              // deprecation warning in highlightField() for PHP 8.1.
-              // @see https://www.drupal.org/project/search_api/issues/3323594
-              $values[$i] = '';
-            }
+            $values[$i] = $this->highlightField($value, $keys);
             if ($values[$i] !== $value) {
               $change = TRUE;
             }
@@ -671,6 +655,7 @@ class Highlight extends ProcessorPluginBase implements PluginFormInterface {
    *   The given text with all occurrences of search keywords highlighted.
    */
   protected function highlightField($text, array $keys, $html = TRUE) {
+    $text = "$text";
     if ($html) {
       $texts = preg_split('#((?:</?[[:alpha:]](?:[^>"\']*|"[^"]*"|\'[^\']\')*>)+)#i', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
       if ($texts === FALSE) {
